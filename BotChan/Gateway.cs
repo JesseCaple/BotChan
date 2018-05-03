@@ -75,7 +75,15 @@ namespace BotChan
                     Compress = false
                 }
             });
-            heartbeatTask = LoopHeartbeatAsync(hello.HeartBeatInterval);
+            var authResponse = await ReceiveAsync();
+            if (authResponse.Opcode == Opcode.Dispatch && authResponse.EventName == "READY")
+            {
+                heartbeatTask = LoopHeartbeatAsync(hello.HeartBeatInterval);
+            }
+            else
+            {
+                throw new Exception("TODO: handle auth failure.");
+            }
         }
 
         private async Task LoopHeartbeatAsync(int interval)

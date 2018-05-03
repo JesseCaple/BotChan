@@ -2,6 +2,7 @@
 {
     enum Opcode
     {
+        Dispatch = 0,
         Heartbeat = 1,
         Identify = 2,
         StatusUpdate = 3,
