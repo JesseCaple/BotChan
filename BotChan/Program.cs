@@ -1,4 +1,9 @@
-﻿using System;
+﻿using BotChan.RequestModels;
+using BotChan.ResponseModels;
+using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace BotChan
 {
@@ -6,7 +11,16 @@ namespace BotChan
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            RunAsync().Wait();
+        }
+
+        static async Task RunAsync()
+        {
+            var config = await Config.OpenAsync("app.cfg");
+            using (var gateway = await Gateway.OpenAsync(config.BotToken))
+            {
+
+            }
         }
     }
 }
